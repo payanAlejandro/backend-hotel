@@ -1,26 +1,27 @@
-import { PORT } from "./config.js";
-const stripe = require("stripe")(
-  "sk_test_51O2gfuJw0dovYyK3m2SlMxrxMN7lpDWb4axDqZYjnzP88GyYi1DybIVnc5MBlk79k0cCspo1VTLnXqfblAPVKtcs00btxDeuDC"
-);
-const express = require("express");
+import { PORT } from "./src/config.js";
+import stripePackage from "stripe";
+const stripe = stripePackage('sk_test_51O2gfuJw0dovYyK3m2SlMxrxMN7lpDWb4axDqZYjnzP88GyYi1DybIVnc5MBlk79k0cCspo1VTLnXqfblAPVKtcs00btxDeuDC');
+
+import express from "express";
 const app = express();
+
 
 const endpointSecret =
   "whsec_a66797fa4ddaddc74dd8e72943f5b8410bde59437ecb13fc80f15b7414353886";
 //const stripe = new Stripe('sk_test_51O2gfuJw0dovYyK3m2SlMxrxMN7lpDWb4axDqZYjnzP88GyYi1DybIVnc5MBlk79k0cCspo1VTLnXqfblAPVKtcs00btxDeuDC');
 
-const session = require("express-session");
+import session from "express-session";
 
-const mysql = require("mysql");
-const cors = require("cors");
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
+import mysql from "mysql";
+import cors from "cors";
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
 const verify = jwt.verify;
 const JWT_SECRET = process.env.JWT_SECRET || "token.01010101";
 
 app.use(cors());
 app.use(express.json());
-const bodyParser = require("body-parser");
+import bodyParser from "body-parser";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -539,6 +540,6 @@ app.delete("/deleteReservation/:id", (req, res) => {
   );
 });
 
-app.listen({PORT}, () => {
+app.listen(PORT, () => {
   console.log("Corriendo en el puerto ",PORT);
 });
