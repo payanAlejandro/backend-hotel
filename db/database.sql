@@ -1,6 +1,5 @@
-/* 
---CREATE DATABASE IF NOT EXIST Hotel;
---USE Hotel;
+CREATE DATABASE hotel;
+USE hotel;
 
 CREATE TABLE usuarios(
 	id_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -14,13 +13,9 @@ CREATE TABLE usuarios(
 CREATE TABLE habitaciones(
 	id_habitacion INT AUTO_INCREMENT KEY,
     estado BOOLEAN,
-    precio FLOAT
-);
-
-CREATE TABLE tipo_de_pago(
-	id_tipo_de_pago INT AUTO_INCREMENT PRIMARY KEY,
-    paypal BOOLEAN,
-    efectivo BOOLEAN
+    precio FLOAT,
+    tipo_de_habitacion VARCHAR(50),
+    imagen VARCHAR(50)
 );
 
 CREATE TABLE reservaciones(
@@ -30,8 +25,6 @@ CREATE TABLE reservaciones(
     numero_huespedes INT,
     id_usuario int,
     id_habitacion int,
-    id_tipo_de_pago int,
     FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario),
-    FOREIGN KEY(id_habitacion) REFERENCES habitaciones(id_habitacion),
-    FOREIGN KEY (id_tipo_de_pago) REFERENCES tipo_de_pago(id_tipo_de_pago)
-); */
+    FOREIGN KEY(id_habitacion) REFERENCES habitaciones(id_habitacion)
+);
