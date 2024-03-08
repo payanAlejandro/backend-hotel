@@ -26,11 +26,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = mysql.createConnection({
-  host: process.env.DB_HOST  ,
-  user:process.env.DB_USER,
-  password:process.env.DB_PASSWORD,
-  database:  process.env.DB_DATABASE ,
-  port: process.env.PORT ,
+  host: '193.203.166.102'  ,
+  user:'u242661299_luxury_user',
+  password:'luxury_P4$$',
+  database:'u242661299_luxury_db' ,
+  port: 3306 ,
 });
 
 
