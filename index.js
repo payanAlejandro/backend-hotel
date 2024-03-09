@@ -409,8 +409,8 @@ app.post("/create-checkout-session", async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: "http://localhost:5173/",
-      cancel_url: "http://localhost:5173/rooms",
+      success_url: "http://https://luxury-hotel-nc06.onrender.com/",
+      cancel_url: "https://luxury-hotel-nc06.onrender.com/rooms",
       metadata: {
         id_usuario: id_usuario,
         id_habitacion: id_habitacion,
