@@ -20,6 +20,12 @@ const verify = jwt.verify;
 const JWT_SECRET = process.env.JWT_SECRET || "token.01010101";
 
 app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://luxury-hotel-nc06.onrender.com');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 app.use(express.json());
 import bodyParser from "body-parser";
 app.use(bodyParser.json());
