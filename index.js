@@ -100,6 +100,7 @@ app.get('/checkEmail', (req, res) => {
   });
 });
 
+
 app.get("/getUsers", (req, res) => {
   db.query("SELECT * FROM usuarios", (err, result) => {
     if (err) {
