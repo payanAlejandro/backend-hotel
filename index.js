@@ -88,17 +88,11 @@ app.post("/createUser", (req, res) => {
 app.get('/checkEmail', (req, res) => {
   const email = req.query.email;
 
-  db.query('SELECT email FROM usuarios WHERE email = ?', [email], (err, results) => {
-      if (err) {
-          console.error('Error executing query: ' + err.stack);
-          res.status(500).json({ error: 'Database error' });
-          return;
-      }
-
+  db.query('SELECT email FROM usuarios WHERE email = ?', [email], ( results) => {
       if (results.length > 0) {
           res.json({ exists: true });
       } else {
-          res.json({ exists: false });
+          res.status(404).json({ error: 'Email not found' });
       }
   });
 });
