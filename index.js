@@ -85,6 +85,21 @@ app.post("/createUser", (req, res) => {
   );
 });
 
+app.get('/checkEmail', (req, res) => {
+  const email = req.query.email;
+
+  connection.query('SELECT COUNT(*) AS count FROM usuarios WHERE email = ?', [email], (err, results) => {
+      if (err) {
+          console.error('Error executing query: ' + err.stack);
+          res.status(500).json({ error: 'Database error' });
+          return;
+      }
+
+      const count = results[0].count;
+      res.json({ exists: count > 0 });
+  });
+});
+
 app.get("/getUsers", (req, res) => {
   db.query("SELECT * FROM usuarios", (err, result) => {
     if (err) {
