@@ -20,8 +20,8 @@ const verify = jwt.verify;
 const JWT_SECRET = process.env.JWT_SECRET || "token.01010101";
 
 
-app.use(cors());
 
+app.use(cors());
 
 app.use(express.json());
 import bodyParser from "body-parser";
@@ -139,7 +139,9 @@ app.post("/login", (req, res) => {
         res.status(401).json({ error: "Credenciales incorrectas" });
       } else {
         const usuario = {
-          email: email,
+          id_usuario: results[0].id_usuario,
+          email: results[0].email,
+          nombre: results[0].nombre
         };
 
         jwt.sign(
