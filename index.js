@@ -19,13 +19,10 @@ import crypto from "crypto";
 const verify = jwt.verify;
 const JWT_SECRET = process.env.JWT_SECRET || "token.01010101";
 
-app.use(cors({
-  origin: ['https://luxuryhotels.businesscodecreators.com/', 'https://luxuryhotels.businesscodecreators.com/facilities'
-,'https://luxuryhotels.businesscodecreators.com/rooms', 'https://luxuryhotels.businesscodecreators.com/contacts',
-'https://luxuryhotels.businesscodecreators.com/login', 'https://luxuryhotels.businesscodecreators.com/signup',
-'https://luxuryhotels.businesscodecreators.com/admin', 'https://luxuryhotels.businesscodecreators.com/reservation-details/'], 
-  credentials: true 
-}));
+
+app.use(cors());
+
+
 app.use(express.json());
 import bodyParser from "body-parser";
 app.use(bodyParser.json());
@@ -91,12 +88,12 @@ app.post("/createUser", (req, res) => {
 app.get('/checkEmail', (req, res) => {
   const email = req.query.email;
 
-  db.query('SELECT email FROM usuarios WHERE email = ?', [email], ( result) => {
-    if (result !== null && result.length > 0) {
-      res.json({ exists: true });
-    } else {
-      res.status(404).json({ error: 'Email not found' });
-    }
+  db.query('SELECT email FROM usuarios WHERE email = ?', [email], ( results) => {
+      if (results.length > 0) {
+          res.json({ exists: true });
+      } else {
+          res.status(404).json({ error: 'Email not found' });
+      }
   });
 });
 
