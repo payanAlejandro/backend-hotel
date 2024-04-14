@@ -26,6 +26,7 @@ import bodyParser from "body-parser";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 function handleDisconnect() {
   const db = mysql.createConnection({
     host: '193.203.166.102',
@@ -39,8 +40,9 @@ function handleDisconnect() {
     if (err) {
       console.error('Error al conectar a la base de datos:', err);
       setTimeout(handleDisconnect, 2000); 
+    } else {
+      console.log('Conexión exitosa a la base de datos');
     }
-    console.log('Conexión exitosa a la base de datos');
   });
 
   db.on('error', (err) => {
@@ -51,9 +53,11 @@ function handleDisconnect() {
       throw err;
     }
   });
+
+  return db; 
 }
 
-handleDisconnect();
+const db = handleDisconnect(); // Iniciar la conexión y obtener la referencia a la conexión
 
 
 // Ruta para mostrar habitaciones disponibles
