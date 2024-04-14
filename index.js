@@ -26,38 +26,13 @@ import bodyParser from "body-parser";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-function handleDisconnect() {
-  const db = mysql.createConnection({
-    host: '193.203.166.102',
-    user: 'u242661299_luxury_user',
-    password: 'luxury_P4$$',
-    database: 'u242661299_luxury_db',
-    port: 3306,
-  });
-
-  db.connect((err) => {
-    if (err) {
-      console.error('Error al conectar a la base de datos:', err);
-      setTimeout(handleDisconnect, 2000); 
-    } else {
-      console.log('Conexión exitosa a la base de datos');
-    }
-  });
-
-  db.on('error', (err) => {
-    console.error('Error de conexión:', err);
-    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      handleDisconnect(); // Reconectar si la conexión se perdió
-    } else {
-      throw err;
-    }
-  });
-
-  return db; 
-}
-
-const db = handleDisconnect(); // Iniciar la conexión y obtener la referencia a la conexión
+const db = mysql.createConnection({
+  host: '193.203.166.102'  ,
+  user:'u242661299_luxury_user',
+  password:'luxury_P4$$',
+  database:'u242661299_luxury_db' ,
+  port: 3306 ,
+});
 
 
 // Ruta para mostrar habitaciones disponibles
