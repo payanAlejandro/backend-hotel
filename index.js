@@ -92,7 +92,7 @@ app.post("/createUser", (req, res) => {
 app.get('/checkEmail', (req, res) => {
   const email = req.query.email;
 
-  db.query('SELECT email FROM usuarios WHERE email = ?', [email], ( results) => {
+  db.query('SELECT email FROM usuarios WHERE email = ?', [email], ( result) => {
     if (result !== null && result.length > 0) {
       res.json({ exists: true });
     } else {
