@@ -93,7 +93,7 @@ app.get('/checkEmail', (req, res) => {
   const email = req.query.email;
 
   db.query('SELECT email FROM usuarios WHERE email = ?', [email], ( results) => {
-    if (results !== null && results.length > 0) {
+    if (result !== null && result.length > 0) {
       res.json({ exists: true });
     } else {
       res.status(404).json({ error: 'Email not found' });
