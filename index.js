@@ -86,7 +86,7 @@ app.post("/createUser", (req, res) => {
 app.get('/checkEmail', (req, res) => {
   const email = req.query.email;
 
-  db.query('SELECT email FROM usuarios WHERE email = ?', [email], (error, results) => {
+  db.query('SELECT email FROM usuarios WHERE email = ?', [email], (error, results, exists) => {
       if (error) {
           console.error('Error al ejecutar la consulta:', error);
           res.status(500).json({ error: 'Error interno del servidor' });
@@ -94,7 +94,7 @@ app.get('/checkEmail', (req, res) => {
       }
 
       if (results && results.length > 0) {
-          res.status(400).json({ error: 'El correo electrónico ya está registrado' });
+        res.json({ exists: true });
       } else {
           res.json({ success: true });
       }
