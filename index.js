@@ -34,6 +34,25 @@ const db = mysql.createConnection({
   port: 3306 ,
 });
 
+db.connect((err) => {
+  if (err) {
+    console.error('Error al conectar a la base de datos:', err);
+    setTimeout(handleDisconnect, 2000); // Intenta reconectar después de 2 segundos
+  }
+  console.log('Conexión exitosa a la base de datos');
+});
+
+
+db.on('error', (err) => {
+  console.error('Error de conexión:', err);
+  if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+    handleDisconnect(); // Reconectar si la conexión se perdió
+  } else {
+    throw err;
+  }
+});
+handleDisconnect(); 
+
 
 // Ruta para mostrar habitaciones disponibles
 app.get('/habitaciones-disponibles', (req, res) => {
