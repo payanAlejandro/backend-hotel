@@ -94,12 +94,13 @@ app.get('/checkEmail', (req, res) => {
       }
 
       if (results && results.length > 0) {
-          res.json({ exists: true });
+          res.status(400).json({ error: 'El correo electrónico ya está registrado' });
       } else {
-          return
+          res.json({ success: true });
       }
   });
 });
+
 
 
 app.get("/getUsers", (req, res) => {
