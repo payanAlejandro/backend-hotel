@@ -19,9 +19,7 @@ import crypto from "crypto";
 const verify = jwt.verify;
 const JWT_SECRET = process.env.JWT_SECRET || "token.01010101";
 
-
 app.use(cors());
-
 
 app.use(express.json());
 import bodyParser from "body-parser";
@@ -88,15 +86,20 @@ app.post("/createUser", (req, res) => {
 app.get('/checkEmail', (req, res) => {
   const email = req.query.email;
 
-  db.query('SELECT email FROM usuarios WHERE email = ?', [email], ( results) => {
-      if (results.length > 0) {
+  db.query('SELECT email FROM usuarios WHERE email = ?', [email], (error, results) => {
+      if (error) {
+          console.error('Error al ejecutar la consulta:', error);
+          res.status(500).json({ error: 'Error interno del servidor' });
+          return;
+      }
+
+      if (results && results.length > 0) {
           res.json({ exists: true });
       } else {
           res.status(404).json({ error: 'Email not found' });
       }
   });
 });
-
 
 
 app.get("/getUsers", (req, res) => {
