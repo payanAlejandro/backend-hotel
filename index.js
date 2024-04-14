@@ -19,24 +19,13 @@ import crypto from "crypto";
 const verify = jwt.verify;
 const JWT_SECRET = process.env.JWT_SECRET || "token.01010101";
 
-app.use(cors());
-
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://luxuryhotels.businesscodecreators.com');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://luxuryhotels.businesscodecreators.com/signup');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
-
-
+app.use(cors({
+  origin: ['https://luxuryhotels.businesscodecreators.com/', 'https://luxuryhotels.businesscodecreators.com/facilities'
+,'https://luxuryhotels.businesscodecreators.com/rooms', 'https://luxuryhotels.businesscodecreators.com/contacts',
+'https://luxuryhotels.businesscodecreators.com/login', 'https://luxuryhotels.businesscodecreators.com/signup',
+'https://luxuryhotels.businesscodecreators.com/admin', 'https://luxuryhotels.businesscodecreators.com/reservation-details/'], 
+  credentials: true 
+}));
 app.use(express.json());
 import bodyParser from "body-parser";
 app.use(bodyParser.json());
