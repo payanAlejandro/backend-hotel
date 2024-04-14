@@ -96,7 +96,7 @@ app.get('/checkEmail', (req, res) => {
       if (results && results.length > 0) {
           res.json({ exists: true });
       } else {
-          res.status(404).json({ error: 'Email not found' });
+          return
       }
   });
 });
