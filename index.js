@@ -255,7 +255,7 @@ app.delete("/deleteUser/:id", (req, res) => {
   const id_usuario = req.params.id_usuario;
 
   db.query(
-    "DELETE FROM usuarios WHERE id_usuario=?",
+    "DELETE FROM usuarios WHERE id_usuario = ?",
     id_usuario,
     (err, result) => {
       if (err) {
