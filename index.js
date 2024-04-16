@@ -256,7 +256,7 @@ app.delete("/deleteUser/:id", (req, res) => {
 
   db.query(
     "DELETE FROM usuarios WHERE id_usuario = ?",
-    id_usuario,
+    [id_usuario],
     (err, result) => {
       if (err) {
         console.log(err);
